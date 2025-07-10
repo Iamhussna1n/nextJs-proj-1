@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,10 +17,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${inter.className} antialiased bg-gradient-to-br from-blue-50 via-white to-indigo-100 min-h-screen flex flex-col`}>
+        {/* Navigation Bar */}
+        <nav className="w-full flex items-center justify-between px-8 py-4 bg-white/80 shadow-sm backdrop-blur sticky top-0 z-30">
+          <Link href="/" className="text-xl font-bold tracking-tight text-indigo-700">NextJSProj</Link>
+          <div className="flex gap-4 text-sm font-medium">
+            <Link href="/login" className="hover:text-indigo-600 transition">Login</Link>
+            <Link href="/signup" className="hover:text-indigo-600 transition">Signup</Link>
+            <Link href="/profile" className="hover:text-indigo-600 transition">Profile</Link>
+          </div>
+        </nav>
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col items-center justify-center px-2 sm:px-0 py-8">
+          <div className="w-full max-w-2xl mx-auto">
+            {children}
+          </div>
+        </main>
+        {/* Footer */}
+        <footer className="w-full text-center py-4 text-xs text-gray-500 bg-white/70 border-t border-gray-100">
+          © {new Date().getFullYear()} NextJSProj. All rights reserved.
+        </footer>
       </body>
     </html>
   );
