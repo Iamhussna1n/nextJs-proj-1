@@ -7,7 +7,7 @@ export function getUserToken(request: NextRequest)
         const decodedToken = jwt.verify(token,process.env.TOKEN_SECRET!);
         console.log('Decoded Token:', decodedToken);
         return (decodedToken as { id: string }).id;     
-    } catch (error) {
+    } catch {
         throw new Error('invalid token');
     }
 }

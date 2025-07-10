@@ -22,7 +22,7 @@ export default function VerifyPage() {
         setError("");
         setSuccess("");
         try {
-            const response = await axios.post('/api/users/verify', { token });
+            await axios.post('/api/users/verify', { token });
             setSuccess("Account verified! Redirecting to login...");
             setTimeout(() => router.push('/login'), 1200);
         } catch (err : unknown) {

@@ -36,7 +36,7 @@ export default function NewPass() {
                 setSuccess("Password updated successfully!");
                 setTimeout(() => router.push("/login"), 1200);
             }
-        } catch (error: unknown) {
+        } catch {
             setError("Failed to set new password. Please try again.");
         } finally {
             setLoading(false);
