@@ -12,7 +12,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const onSubmit = async (e: any) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     try {
@@ -23,10 +23,11 @@ export default function Login() {
       } else {
         setError("Wrong credentials");
       }
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
+    } catch (error: unknown) {
+      const err = error as { response?: { status: number } };
+      if (err.response && err.response.status === 401) {
         setError("Wrong credentials");
-      } else if (error.response && error.response.status === 404) {
+      } else if (err.response && err.response.status === 404) {
         setError("User not found");
       } else {
         setError("Something went wrong");
@@ -87,7 +88,7 @@ export default function Login() {
         </form>
         <div className="flex flex-col gap-2 mt-6">
           <Link href="/signup" className="flex items-center justify-center gap-2 text-indigo-600 hover:underline text-sm">
-            <FiUserPlus /> Don't have an account? Signup
+            <FiUserPlus /> Don&apos;t have an account? Signup
           </Link>
           <Link href="/resetPass" className="flex items-center justify-center gap-2 text-indigo-600 hover:underline text-sm">
             <FiKey /> Forgot Password?

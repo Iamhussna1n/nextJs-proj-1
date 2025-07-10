@@ -15,8 +15,9 @@ export async function GET()
         });
         return response;
         
-    } catch (error : any) {
-        console.log("Error in GET /api/users/logout:", error.message);
+    } catch (error : unknown) {
+        const err = error as { message?: string };
+        console.log("Error in GET /api/users/logout:", err.message);
         return NextResponse.json({
             message: "Internal Server Error",
             status: 500,

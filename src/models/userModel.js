@@ -1,6 +1,4 @@
 import mongoose from 'mongoose';
-import { type } from 'os';
-import { stringify } from 'querystring';
 
 const userSchema = new mongoose.Schema({
     username : {

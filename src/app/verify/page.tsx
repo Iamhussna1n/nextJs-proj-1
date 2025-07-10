@@ -25,10 +25,11 @@ export default function VerifyPage() {
             const response = await axios.post('/api/users/verify', { token });
             setSuccess("Account verified! Redirecting to login...");
             setTimeout(() => router.push('/login'), 1200);
-        } catch (err : any) {
+        } catch (err : unknown) {
     // Show the backend error if available
-            setError(err.response?.data?.error || "Verification failed. Please try again.");
-            console.error(err.response?.data || err);
+            const error = err as { response?: { data?: { error?: string } } };
+            setError(error.response?.data?.error || "Verification failed. Please try again.");
+            console.error(error.response?.data || error);
         }   finally {
             setLoading(false);
         }

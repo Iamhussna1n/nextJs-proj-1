@@ -3,7 +3,6 @@ import {NextRequest, NextResponse} from "next/server";
 import {User} from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import {sendEmail} from "@/helpers/mailer";
-import { send } from "process";
 
 
 export async function POST(request : NextRequest)
@@ -42,7 +41,7 @@ export async function POST(request : NextRequest)
             newUser,
         });
 
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error in POST /api/users/signup:", error);
         return NextResponse.json({
         message: "Internal Server Error",

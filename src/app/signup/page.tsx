@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { FiUserPlus, FiLogIn, FiLock } from "react-icons/fi";
+import { FiUserPlus, FiLogIn } from "react-icons/fi";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export default function SignUpPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const mysignup = async (e: any) => {
+  const mysignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
     if (user.password !== user.confirmPassword) {
@@ -26,9 +26,9 @@ export default function SignUpPage() {
     }
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/signup", user);
+      await axios.post("/api/users/signup", user);
       router.push("/login");
-    } catch (error) {
+    } catch (error: unknown) {
       setError("An error occurred during signup. Please try again.");
     } finally {
       setLoading(false);

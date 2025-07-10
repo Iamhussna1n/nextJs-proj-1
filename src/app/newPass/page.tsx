@@ -18,7 +18,7 @@ export default function NewPass() {
         setToken(val || "");
     }, []);
 
-    const submitPass = async (e: any) => {
+    const submitPass = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
         setSuccess("");
@@ -36,7 +36,7 @@ export default function NewPass() {
                 setSuccess("Password updated successfully!");
                 setTimeout(() => router.push("/login"), 1200);
             }
-        } catch (error: any) {
+        } catch (error: unknown) {
             setError("Failed to set new password. Please try again.");
         } finally {
             setLoading(false);

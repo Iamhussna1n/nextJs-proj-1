@@ -2,11 +2,11 @@ import nodemailer from 'nodemailer';
 import bycript from 'bcryptjs';
 import {User} from '@/models/userModel';
 
-export async function sendEmail({email, emailType, userID} : any) {
+export async function sendEmail({email, emailType, userID}: { email: string; emailType: string; userID: string }) {
     try {
         const token = await bycript.hash(userID.toString(), 10);
         if(emailType === 'verify') {
-            const r = await User.findOneAndUpdate(userID,{
+            const r = await User.findOneAndUpdate({ _id: userID },{
                 verifyToken: token,
                 verifyTokenExpiry: Date.now() + 3600000 // 1 hour
             });
@@ -19,7 +19,7 @@ export async function sendEmail({email, emailType, userID} : any) {
             });
         }
         // Looking to send emails in production? Check out our Email API/SMTP product!
-        var transport = nodemailer.createTransport({
+        const transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: 'l233073@lhr.nu.edu.pk',

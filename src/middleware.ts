@@ -5,7 +5,6 @@ export function middleware(request: NextRequest) {
     console.log('Middleware triggered for URL:', url);
 
     const isPublicPath = url === '/login' || url === '/signup' || url === '/verify' || url === '/reset-password';
-    const isPrivatePath = url.startsWith('/profile');
 
     const token = request.cookies.get('token')?.value || '';
 

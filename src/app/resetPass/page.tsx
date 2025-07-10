@@ -9,7 +9,7 @@ export default function ResetPass() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
 
-    const sendResetLink = async (e: any) => {
+    const sendResetLink = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError("");
         setSuccess("");
@@ -19,8 +19,9 @@ export default function ResetPass() {
             if (response.status === 200) {
                 setSuccess("Reset link sent to your email");
             }
-        } catch (error: any) {
-            if (error.response && error.response.status === 404) {
+        } catch (error: unknown) {
+            const err = error as { response?: { status: number } };
+            if (err.response && err.response.status === 404) {
                 setError("Email not found");
             } else {
                 setError("Something went wrong");
