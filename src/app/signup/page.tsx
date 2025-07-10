@@ -28,7 +28,7 @@ export default function SignUpPage() {
       setLoading(true);
       await axios.post("/api/users/signup", user);
       router.push("/login");
-    } catch (error: unknown) {
+    } catch {
       setError("An error occurred during signup. Please try again.");
     } finally {
       setLoading(false);

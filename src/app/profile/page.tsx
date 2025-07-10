@@ -15,7 +15,7 @@ export default function UserProfile() {
       try {
         const response = await axios.get("/api/users/me");
         setUserData(response.data._id);
-      } catch (error) {
+      } catch {
         router.push("/login");
       } finally {
         setLoading(false);
